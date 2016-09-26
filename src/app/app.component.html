@@ -1,3 +1,30 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <h1>
+    {{title}}
+  </h1>
+
+  <div>
+    <ul>
+      <li *ngFor="let item of todolist; let i = index">
+        <label>{{item.name}}</label> 
+        <button class="btn btn-warning" (click)="editTodo(i)">Edit</button> | 
+        <button class="btn btn-danger" (click)="deleteTodo(i)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <form (submit)="addTodo($event)">
+      <div class="col-md-4">
+        <input [(ngModel)]="newTodo" class="form-control" [ngModelOptions]="{standalone: true}"> 
+      </div>
+      <div class="col-md-2" *ngIf="editState">
+        <button class="btn btn-primary" type="submit">Add</button>
+      </div>
+      <div class="col-md-2" *ngIf="!editState">
+        <button class="btn btn-warning" type="submit">Edit</button>
+      </div>
+    </form>
+  </div>
+
+</div>
